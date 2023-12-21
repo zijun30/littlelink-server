@@ -5,8 +5,8 @@ module.exports = {
       config.performance = Object.assign(
         {},
         {
-          maxAssetSize: Infinity,
-          maxEntrypointSize: Infinity,
+          maxAssetSize: 2000000,
+          maxEntrypointSize: 2000000,
           hints: false,
         }
       );
