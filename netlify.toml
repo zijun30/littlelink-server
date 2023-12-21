@@ -1,2 +1,2 @@
 [build]
-  functions = "build/server.js"
+  functions = "build/"
