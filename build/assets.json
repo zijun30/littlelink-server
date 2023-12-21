@@ -120,6 +120,9 @@
       "/css/dark.css",
       "/css/light.css"
     ],
+    "/_redirects": [
+      "/_redirects"
+    ],
     "txt": [
       "/robots.txt"
     ],
