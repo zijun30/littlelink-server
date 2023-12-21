@@ -1,13 +1,18 @@
 "use strict";
 
 module.exports = {
+  options: {
+    staticExport: {
+      parallel: 5, // how many pages to render at a time
+      routesExport: "routes",
+      renderExport: "render",
+      scriptInline: false,
+      windowRoutesVariable: "RAZZLE_STATIC_ROUTES",
+      windowRoutesDataVariable: "RAZZLE_STATIC_DATA_ROUTES",
+    },
+  },
   modifyWebpackConfig(opts) {
     const config = opts.webpackConfig;
-
-    // Change the name of the server output file in production
-    if (opts.env.target === "node" && !opts.env.dev) {
-      config.output.filename = "server.js";
-    }
 
     if (opts.env.target === "web") {
       config.performance = {
