@@ -6,7 +6,7 @@ module.exports = {
 
     // Change the name of the server output file in production
     if (opts.env.target === "node" && !opts.env.dev) {
-      config.output.filename = "server.js";
+      config.output.filename = "index.js";
     }
 
     if (opts.env.target === "web") {
