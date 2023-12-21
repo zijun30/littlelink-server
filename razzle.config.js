@@ -1,15 +1,41 @@
+"use strict";
+
 module.exports = {
-  // ...
-  modify(defaultConfig, { target, dev }, webpack) {
-    if (!dev) {
-      config.performance = Object.assign(
-        {},
-        {
-          maxAssetSize: 2000000,
-          maxEntrypointSize: 2000000,
-          hints: false,
-        }
-      );
+  modifyWebpackConfig(opts) {
+    const config = opts.webpackConfig;
+
+    // Change the name of the server output file in production
+    if (opts.env.target === "node" && !opts.env.dev) {
+      config.output.filename = "custom.js";
+    }
+
+    if (opts.env.target === "web") {
+      config.performance = {
+        maxAssetSize: 2 * 1024 * 1024,
+        maxEntrypointSize: 2 * 1024 * 1024,
+      };
+      config.optimization = {
+        splitChunks: {
+          chunks: "all",
+          cacheGroups: {
+            default: false,
+            vendors: false,
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: "vendor",
+              chunks: "all",
+            },
+            common: {
+              name: "common",
+              minChunks: 2,
+              chunks: "all",
+              priority: 10,
+              reuseExistingChunk: true,
+              enforce: true,
+            },
+          },
+        },
+      };
     }
 
     return config;
